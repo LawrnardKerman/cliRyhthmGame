@@ -1,34 +1,21 @@
 #include<bits/stdc++.h>
 #include <chrono>
+#include <string>
 #include <termios.h>
 #include <ncurses.h>
 using namespace std;
 using namespace chrono;
 
 void clearScreen(){
-    cout<<"\033[1;1H]";
-    cout<<"---------------------------------------------------------------------"<<"\n";
-    cout<<"\r";
-    cout<<"---------------------------------------------------------------------"<<"\n";
-    cout<<"\r";
-    cout<<"---------------------------------------------------------------------"<<"\n";
-    cout<<"\r";
-    cout<<"---------------------------------------------------------------------"<<"\n";
-    cout<<"\r";
-    cout<<"---------------------------------------------------------------------"<<"\n";
-    cout<<"\r";
-    cout<<"---------------------------------------------------------------------"<<"\n";
-    cout<<"\r";
-    cout<<"---------------------------------------------------------------------"<<"\n";
-    cout<<"\r";
-    cout<<"---------------------------------------------------------------------"<<"\n";
-    cout<<"\r";
-    cout<<"---------------------------------------------------------------------"<<"\n";
-    cout<<"\r";
-    cout<<"---------------------------------------------------------------------"<<"\n";
+    string temp="---------------------------------------------------------------------";
+    for(int i=0; i<10; i++){
+        move(1,i+1);
+        printw("%s",temp.c_str());
+        
+    }
 
 }
-
+// dont forget: printf("\033[%d;%dH", row, col);
 int main(){
     initscr();
     cbreak();
@@ -39,17 +26,19 @@ int main(){
     auto end=steady_clock::now();
     cout<<(start-end).count();
     int input;
-    
+    string temp;
     while(true){
         input=getch();
         if(input!=ERR){
             if(input=='x'||input=='z'){
                 end=steady_clock::now();
                 clearScreen();
-                cout<<"\033[1;1H";
-                cout<<(end-start).count();
-                cout<<"test";
-                cout<<"\n";
+                move(1,0);
+                temp=to_string((end-start).count());
+                printw("%s", temp.c_str());
+                refresh();                
+                clear();
+
             }
             if(input=='q'){
                 cout<<"quiting...";
