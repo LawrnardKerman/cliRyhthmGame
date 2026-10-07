@@ -11,13 +11,21 @@ int main(){
     cbreak();
     noecho();
     keypad(stdscr, TRUE);
+    nodelay(stdscr, TRUE);
     auto start=high_resolution_clock::now();
     auto end=high_resolution_clock::now();
     cout<<(start-end).count();
-    char input;
+    int input;
     while(true){
-        input=getchar();
-        cout<<input;
+        input=getch();
+        if(input!=ERR){
+            if(input=='x'||input=='z'){
+                end=high_resolution_clock::now();
+                cout<<(start-end).count();
+                cout<<"/n";
+            }
+        }
+        
     }
     endwin(); 
 
