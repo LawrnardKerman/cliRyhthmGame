@@ -28,8 +28,11 @@ int main(){
         if(input!=ERR){
             if(input=='x'||input=='z'){
                 end=steady_clock::now();
-                cout<<"\r"<<(end-start).count();
-
+                cout<<"\e[1;1H";
+                cout<<"\r";
+                cout<<(end-start).count();
+                cout<<"\e[2;1H";
+                cout<<"test";
             }
             if(input=='q'){
                 cout<<"quiting...";
