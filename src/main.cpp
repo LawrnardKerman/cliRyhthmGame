@@ -1,16 +1,13 @@
 #include<bits/stdc++.h>
 #include <chrono>
-#include <string>
 #include <termios.h>
 #include <ncurses.h>
 using namespace std;
 using namespace chrono;
 
 void clearScreen(){
-    string temp="---------------------------------------------------------------------";
     for(int i=0; i<10; i++){
-        move(1,i+1);
-        printw("%s",temp.c_str());
+        cout<<"\r"<<"---------------------------------------------------------------------"<<"\n";
         
     }
 
@@ -26,18 +23,12 @@ int main(){
     auto end=steady_clock::now();
     cout<<(start-end).count();
     int input;
-    string temp;
     while(true){
         input=getch();
         if(input!=ERR){
             if(input=='x'||input=='z'){
                 end=steady_clock::now();
-                clearScreen();
-                move(1,0);
-                temp=to_string((end-start).count());
-                printw("%s", temp.c_str());
-                refresh();                
-                clear();
+                cout<<"\r"<<(end-start).count();
 
             }
             if(input=='q'){
