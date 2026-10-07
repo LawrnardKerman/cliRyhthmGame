@@ -12,18 +12,26 @@ int main(){
     noecho();
     keypad(stdscr, TRUE);
     nodelay(stdscr, TRUE);
-    auto start=high_resolution_clock::now();
-    auto end=high_resolution_clock::now();
+    auto start=steady_clock::now();
+    auto end=steady_clock::now();
     cout<<(start-end).count();
     int input;
+    
     while(true){
         input=getch();
         if(input!=ERR){
             if(input=='x'||input=='z'){
-                end=high_resolution_clock::now();
-                cout<<(start-end).count();
-                cout<<"/n";
+                end=steady_clock::now();
+                cout<<"\r";
+                cout<<(end-start).count();
+                cout<<"test";
+                cout<<"\n";
             }
+            if(input=='q'){
+                cout<<"quiting...";
+                break;
+            }
+            start=steady_clock::now();
         }
         
     }
