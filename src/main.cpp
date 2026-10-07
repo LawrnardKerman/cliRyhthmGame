@@ -1,30 +1,46 @@
 #include<bits/stdc++.h>
 #include <chrono>
-#include <X11/Xlib.h>
-#include "X11/keysym.h"
+#include <termios.h>
 using namespace std;
 using namespace chrono;
-
-bool keyIsPressed(KeySym ks) {
-    Display *dpy = XOpenDisplay(":0");
-    char keys_return[32];
-    XQueryKeymap(dpy, keys_return);
-    KeyCode kc2 = XKeysymToKeycode(dpy, ks);
-    bool isPressed = !!(keys_return[kc2 >> 3] & (1 << (kc2 & 7)));
-    XCloseDisplay(dpy);
-    return isPressed;
+char getch() {
+    char buf = 0;
+    struct termios old = {0};
+    
+    // Get current terminal settings
+    if (tcgetattr(0, &old) < 0)
+        perror("tcsetattr()");
+        
+    // Disable canonical mode (line buffering) and local echo
+    old.c_lflag &= ~ICANON;
+    old.c_lflag &= ~ECHO;
+    old.c_cc[VMIN] = 1;
+    old.c_cc[VTIME] = 0;
+    
+    if (tcsetattr(0, TCSANOW, &old) < 0)
+        perror("tcsetattr ICANON");
+        
+    // Read the single character
+    if (read(0, &buf, 1) < 0)
+        perror ("read()");
+        
+    // Restore original terminal settings
+    old.c_lflag |= ICANON;
+    old.c_lflag |= ECHO;
+    if (tcsetattr(0, TCSADRAIN, &old) < 0)
+        perror ("tcsetattr ~ICANON");
+        
+    return buf;
 }
+
 int main(){
     auto start=high_resolution_clock::now();
     auto end=high_resolution_clock::now();
     cout<<(start-end).count();
+    char input;
     while(true){
-        keyIsPressed(XK_A){
-            auto end=high_resolution_clock::now();
-            cout<<(start-end).count();
-            auto start=high_resolution_clock::now();
-        }
-
+        input = getch(); 
+        cout<<input;
     }
 
 }
