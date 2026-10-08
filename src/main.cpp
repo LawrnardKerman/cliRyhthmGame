@@ -17,7 +17,6 @@ int main(){
     initscr();
     cbreak();
     noecho();
-    keypad(stdscr, TRUE);
     nodelay(stdscr, TRUE);
     auto start=steady_clock::now();
     auto end=steady_clock::now();
@@ -26,14 +25,14 @@ int main(){
     while(true){
         input=getch();
         if(input!=ERR){
-            if(input=='x'||input=='z'){
+            // if(input=='x'||input=='z'){
                 end=steady_clock::now();
-                cout<<"\033[1;1H";
-                // cout<<"\r";
+                // cout<<"\033[1;1H";
                 cout<<(end-start).count();
+                refresh();
                 // cout<<"\033[1;1H";
                 // cout<<"test";
-            }
+            // }
             if(input=='q'){
                 cout<<"quiting...";
                 break;
