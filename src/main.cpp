@@ -36,6 +36,7 @@ void drawBorder(){
     refresh();
 }
 int main(){
+    
     setlocale(LC_ALL, "en_US.utf8");
     initscr();
     cbreak();
