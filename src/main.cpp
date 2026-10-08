@@ -15,19 +15,30 @@ void clearScreen(){
 void drawBorder(){
     for(int i=0; i<60; i++){
         move(0, i);
-        printw("-");
+        if(i==0){
+            printw("╔");
+        }else if(i==59){
+            printw("╗");
+        }else{
+            printw("═");
+        }
     }
     for(int i=0; i<60; i++){
-        move(19, i);
-        printw("-");
+         if(i==0){
+            printw("╚");
+        }else if(i==59){
+            printw("╝");
+        }else{
+            printw("═");
+        }
     }
     for(int i=1; i<19; i++){
         move(i, 0);
-        printw("|");
+        printw("║");
     }
     for(int i=1; i<19; i++){
         move(i, 59);
-        printw("|");
+        printw("║");
     }
     refresh();
 }
@@ -94,14 +105,28 @@ int main(){
             move(row,col);
             refresh();
             if(input=='q'){
+                clear();
                 move(0,0);
+                printw("quitting.");
+                refresh();
+                printw("quitting..");
+                refresh();
                 printw("quitting...");
+                refresh();
+                printw("quitting....");
+                refresh();
+                printw("quitting.....");
                 refresh();
                 break;
             }
             start=steady_clock::now();
         }
         
+    }
+    start=steady_clock::now();
+    end=steady_clock::now();
+    while((end-start).count()<500000){
+        end=steady_clock::now();
     }
     endwin(); 
 
