@@ -25,14 +25,14 @@ int main(){
     while(true){
         input=getch();
         if(input!=ERR){
-            // if(input=='x'||input=='z'){
+            if(input=='x'||input=='z'){
                 end=steady_clock::now();
-                // cout<<"\033[1;1H";
+                clearScreen();
+                cout<<"\033[1;1H";
                 cout<<(end-start).count();
-                refresh();
-                // cout<<"\033[1;1H";
-                // cout<<"test";
-            // }
+                cout<<"test";
+                cout<<"\n";
+            }
             if(input=='q'){
                 cout<<"quiting...";
                 break;
