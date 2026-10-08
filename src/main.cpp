@@ -25,6 +25,8 @@ int main(){
     printw("welcome!");
     move(1,0);
     printw("Press s to start");
+    move(2,0);
+    printw("Press q to quit");
     refresh();
     while(true){
         input=getch();
@@ -33,17 +35,46 @@ int main(){
             break;
         }
     }
+    int row=0;
+    int col=0;
     while(true){
         input=getch();
         if(input!=ERR){
-            if(input=='x'||input=='z'){
+            clear();
+            if(input=='j'){
                 end=steady_clock::now();
-                clear();
-                clearScreen();
-                move(0,0);
-                printw("中文");
+                if(row<19){
+                    row++;
+                }
+                move(row,col);
                 refresh();
             }
+            if(input=='k'){
+                end=steady_clock::now();
+                if(row>0){
+                    row--;
+                }
+                move(row,col);
+                refresh();
+            }
+            if(input=='l'){
+                end=steady_clock::now();
+                
+                if(col<59){
+                    col++;
+                }
+                move(row,col);
+                
+            }
+            if(input=='h'){
+                end=steady_clock::now();
+                if(col>0){
+                    col--;
+                }
+                move(row,col);
+                
+            }
+            refresh();
             if(input=='q'){
                 move(0,0);
                 printw("quitting...");
