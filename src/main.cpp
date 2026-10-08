@@ -1,17 +1,10 @@
 
 #include <chrono>
 #include <termios.h>
-#include <ncurses.h>
+#include <locale.h>
+#include <ncursesw/ncurses.h>
 using namespace std;
 using namespace chrono;
-
-void clearScreen(){
-    for(int i=0; i<10; i++){
-        move(i, 0);
-        printw("------------------------------------------------------------\n");
-    }
-
-}
 void drawBorder(){
     for(int i=0; i<60; i++){
         move(0, i);
@@ -43,6 +36,7 @@ void drawBorder(){
     refresh();
 }
 int main(){
+    setlocale(LC_ALL, "en_US.utf8");
     initscr();
     cbreak();
     noecho();
