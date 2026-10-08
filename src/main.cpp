@@ -12,7 +12,6 @@ void clearScreen(){
     }
 
 }
-// dont forget: printf("\033[%d;%dH", row, col);
 int main(){
     initscr();
     cbreak();
@@ -21,19 +20,34 @@ int main(){
     auto start=steady_clock::now();
     auto end=steady_clock::now();
     int input;
+
+    move(0,0);
+    printw("welcome!");
+    move(1,0);
+    printw("Press s to start");
+    refresh();
+    while(true){
+        input=getch();
+        if(input=='s'){
+            clear();
+            break;
+        }
+    }
     while(true){
         input=getch();
         if(input!=ERR){
             if(input=='x'||input=='z'){
+                end=steady_clock::now();
                 clear();
                 clearScreen();
-                // move(1, 26);
-                // printw("Hello CSC 222 from ncurses!");
+                move(0,0);
+                printw("中文");
                 refresh();
-                getch();
             }
             if(input=='q'){
+                move(0,0);
                 printw("quitting...");
+                refresh();
                 break;
             }
             start=steady_clock::now();
