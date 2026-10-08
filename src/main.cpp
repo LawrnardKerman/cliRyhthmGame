@@ -1,4 +1,4 @@
-#include<bits/stdc++.h>
+
 #include <chrono>
 #include <termios.h>
 #include <ncurses.h>
@@ -7,8 +7,8 @@ using namespace chrono;
 
 void clearScreen(){
     for(int i=0; i<10; i++){
-        cout<<"\r"<<"---------------------------------------------------------------------"<<"\n";
-        
+        move(i, 0);
+        printw("------------------------------------------------------------\n");
     }
 
 }
@@ -20,21 +20,20 @@ int main(){
     nodelay(stdscr, TRUE);
     auto start=steady_clock::now();
     auto end=steady_clock::now();
-    cout<<(start-end).count();
     int input;
     while(true){
         input=getch();
         if(input!=ERR){
             if(input=='x'||input=='z'){
-                end=steady_clock::now();
+                clear();
                 clearScreen();
-                cout<<"\033[1;1H";
-                cout<<(end-start).count();
-                cout<<"test";
-                cout<<"\n";
+                // move(1, 26);
+                // printw("Hello CSC 222 from ncurses!");
+                refresh();
+                getch();
             }
             if(input=='q'){
-                cout<<"quiting...";
+                printw("quitting...");
                 break;
             }
             start=steady_clock::now();
