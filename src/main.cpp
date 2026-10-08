@@ -12,6 +12,25 @@ void clearScreen(){
     }
 
 }
+void drawBorder(){
+    for(int i=0; i<60; i++){
+        move(0, i);
+        printw("-");
+    }
+    for(int i=0; i<60; i++){
+        move(19, i);
+        printw("-");
+    }
+    for(int i=1; i<19; i++){
+        move(i, 0);
+        printw("|");
+    }
+    for(int i=1; i<19; i++){
+        move(i, 59);
+        printw("|");
+    }
+    refresh();
+}
 int main(){
     initscr();
     cbreak();
@@ -37,25 +56,25 @@ int main(){
     }
     int row=0;
     int col=0;
+    drawBorder();
+    refresh();
+    move(0,0);
     while(true){
         input=getch();
         if(input!=ERR){
             clear();
+            drawBorder();
             if(input=='j'){
                 end=steady_clock::now();
                 if(row<19){
                     row++;
                 }
-                move(row,col);
-                refresh();
             }
             if(input=='k'){
                 end=steady_clock::now();
                 if(row>0){
                     row--;
                 }
-                move(row,col);
-                refresh();
             }
             if(input=='l'){
                 end=steady_clock::now();
@@ -63,7 +82,6 @@ int main(){
                 if(col<59){
                     col++;
                 }
-                move(row,col);
                 
             }
             if(input=='h'){
@@ -71,9 +89,9 @@ int main(){
                 if(col>0){
                     col--;
                 }
-                move(row,col);
                 
             }
+            move(row,col);
             refresh();
             if(input=='q'){
                 move(0,0);
