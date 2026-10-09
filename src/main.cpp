@@ -1,43 +1,29 @@
 
 #include <chrono>
+#include <string>
 #include <termios.h>
-#include <locale.h>
 #include <ncursesw/ncurses.h>
 using namespace std;
 using namespace chrono;
 void drawBorder(){
     for(int i=0; i<60; i++){
         move(0, i);
-        if(i==0){
-            printw("╔");
-        }else if(i==59){
-            printw("╗");
-        }else{
-            printw("═");
-        }
+        printw("#");
     }
     for(int i=0; i<60; i++){
-         if(i==0){
-            printw("╚");
-        }else if(i==59){
-            printw("╝");
-        }else{
-            printw("═");
-        }
+        move(19, i);
+        printw("#");
     }
-    for(int i=1; i<19; i++){
+    for(int i=0; i<20; i++){
         move(i, 0);
-        printw("║");
+        printw("|");
     }
-    for(int i=1; i<19; i++){
+    for(int i=0; i<20; i++){
         move(i, 59);
-        printw("║");
+        printw("|");
     }
-    refresh();
 }
 int main(){
-    
-    setlocale(LC_ALL, "en_US.utf8");
     initscr();
     cbreak();
     noecho();
@@ -57,12 +43,16 @@ int main(){
         input=getch();
         if(input=='s'){
             clear();
+            drawBorder();
+            refresh();
             break;
         }
     }
     int row=0;
     int col=0;
     drawBorder();
+    move(0,0);
+    printw("     ");
     refresh();
     move(0,0);
     while(true){
@@ -97,20 +87,18 @@ int main(){
                 }
                 
             }
+            move(0,0);
+            printw("     ");
+            move(0,0);
+            printw("%s", to_string(row).c_str());
+            move(0, 3);
+            printw("%s", to_string(col).c_str());
             move(row,col);
+            
             refresh();
             if(input=='q'){
-                clear();
                 move(0,0);
-                printw("quitting.");
-                refresh();
-                printw("quitting..");
-                refresh();
                 printw("quitting...");
-                refresh();
-                printw("quitting....");
-                refresh();
-                printw("quitting.....");
                 refresh();
                 break;
             }
