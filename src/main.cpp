@@ -38,6 +38,8 @@ int main(){
     printw("Press s to start");
     move(2,0);
     printw("Press q to quit");
+    move(3,0);
+    printw("press n to make a beatmap");
     refresh();
     while(true){
         input=getch();
