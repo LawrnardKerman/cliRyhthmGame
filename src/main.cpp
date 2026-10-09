@@ -3,6 +3,7 @@
 #include <string>
 #include <termios.h>
 #include <ncursesw/ncurses.h>
+#include "song.h";
 using namespace std;
 using namespace chrono;
 void drawBorder(){
