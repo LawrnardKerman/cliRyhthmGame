@@ -8,6 +8,16 @@
 #include "song.h"
 using namespace std;
 using namespace chrono;
+void drawSquare(int row, int col, char in){
+    move(row,col);
+    printw("%c", in);
+    move(row+1,col);
+    printw("%c", in);
+    move(row+1,col+1);
+    printw("%c", in);
+    move(row,col+1);
+    printw("%c", in);
+}
 void drawBorder(){
     for(int i=0; i<60; i++){
         move(0, i);
@@ -152,8 +162,6 @@ int main(){
         }
         
     }
-    auto start=steady_clock::now();
-    auto end=steady_clock::now();
     int n=getLength();
     bool a[n];
     bool b[n];
@@ -165,86 +173,32 @@ int main(){
         c[i]=cValue(i);
         d[i]=dValue(i);
     }
+    auto aTime=steady_clock::now();
+    auto bTime=steady_clock::now();
+    auto cTime=steady_clock::now();
+    auto dTime=steady_clock::now();
+    auto now=steady_clock::now();
     int tempo=getTempo();
+    move(0,0);
     while(true){
+        now=steady_clock::now();
         input=getch();
         if(input!=ERR){
             if(input=='z'){
-               move(3,1);
-                printw("o");
-                move(4,1);
-                printw("o");
-                move(4,2);
-                printw("o");
-                move(3,2);
-                printw("o");
-            }else if(input!='z'){
-                move(3,1);
-                printw("-");
-                move(4,1);
-                printw("-");
-                move(4,2);
-                printw("-");
-                move(3,2);
-                printw("-");
+                aTime=steady_clock::now();
+                drawSquare(3, 1, '0');
             }
             if(input=='x'){
-                move(7,1);
-                printw("o");
-                move(8,1);
-                printw("o");
-                move(8,2);
-                printw("o");
-                move(7,2);
-                printw("o");
-            }else if(input!='x'){
-                move(7,1);
-                printw("-");
-                move(8,1);
-                printw("-");
-                move(8,2);
-                printw("-");
-                move(7,2);
-                printw("-");
-            }
-            if(input==','){
-                move(11,1);
-                printw("o");
-                move(12,1);
-                printw("o");
-                move(12,2);
-                printw("o");
-                move(11,2);
-                printw("o");
-            }else if(input!=','){
-                move(11,1);
-                printw("-");
-                move(12,1);
-                printw("-");
-                move(12,2);
-                printw("-");
-                move(11,2);
-                printw("-");
-            }
+                bTime=steady_clock::now();
+                drawSquare(7, 1, '0');
+            } 
             if(input=='.'){
-                move(15,1);
-                printw("o");
-                move(16,1);
-                printw("o");
-                move(16,2);
-                printw("o");
-                move(15,2);
-                printw("o");
-            }else if(input!='.'){
-                move(15,1);
-                printw("-");
-                move(16,1);
-                printw("-");
-                move(16,2);
-                printw("-");
-                move(15,2);
-                printw("-");
-                    
+                cTime=steady_clock::now();
+                drawSquare(11, 1, '0');
+            }
+            if(input=='/'){
+                dTime=steady_clock::now();
+                drawSquare(15, 1, '0');
             }
             move(0,0);
             if(input=='q'){
@@ -253,6 +207,19 @@ int main(){
                 quick_exit(0);
             }
         }
+        if(std::chrono::duration_cast<std::chrono::milliseconds>(now-aTime).count()>=((60.0/tempo/8)*1000)){
+                drawSquare(3, 1, '-');
+        }
+        if(std::chrono::duration_cast<std::chrono::milliseconds>(now-bTime).count()>=((60.0/tempo/8)*1000)){
+                drawSquare(7, 1, '-');
+        }
+        if(std::chrono::duration_cast<std::chrono::milliseconds>(now-cTime).count()>=((60.0/tempo/8)*1000)){
+                drawSquare(11, 1, '-');
+        }
+        if(std::chrono::duration_cast<std::chrono::milliseconds>(now-dTime).count()>=((60.0/tempo/8)*1000)){
+                drawSquare(15, 1, '-');
+        }
+        move(0,0);
         refresh();
     }
 
