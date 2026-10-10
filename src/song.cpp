@@ -19,3 +19,6 @@ bool dValue(int i){
 int getTempo(){
     return tempo;
 }
+int getLength(){
+    return sizeof(a);
+}

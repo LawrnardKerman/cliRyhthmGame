@@ -6,6 +6,7 @@ bool aValue(int i);
 bool bValue(int i);
 bool cValue(int i);
 bool dValue(int i);
-int getTemp();
+int getTempo();
+int getLength();
 
 #endif
