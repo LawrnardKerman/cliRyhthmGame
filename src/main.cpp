@@ -1,6 +1,7 @@
 
 #include <chrono>
 #include <cstdlib>
+#include <ncurses.h>
 #include <string>
 #include <termios.h>
 #include <ncursesw/ncurses.h>
@@ -165,6 +166,95 @@ int main(){
         d[i]=dValue(i);
     }
     int tempo=getTempo();
+    while(true){
+        input=getch();
+        if(input!=ERR){
+            if(input=='z'){
+               move(3,1);
+                printw("o");
+                move(4,1);
+                printw("o");
+                move(4,2);
+                printw("o");
+                move(3,2);
+                printw("o");
+            }else if(input!='z'){
+                move(3,1);
+                printw("-");
+                move(4,1);
+                printw("-");
+                move(4,2);
+                printw("-");
+                move(3,2);
+                printw("-");
+            }
+            if(input=='x'){
+                move(7,1);
+                printw("o");
+                move(8,1);
+                printw("o");
+                move(8,2);
+                printw("o");
+                move(7,2);
+                printw("o");
+            }else if(input!='x'){
+                move(7,1);
+                printw("-");
+                move(8,1);
+                printw("-");
+                move(8,2);
+                printw("-");
+                move(7,2);
+                printw("-");
+            }
+            if(input==','){
+                move(11,1);
+                printw("o");
+                move(12,1);
+                printw("o");
+                move(12,2);
+                printw("o");
+                move(11,2);
+                printw("o");
+            }else if(input!=','){
+                move(11,1);
+                printw("-");
+                move(12,1);
+                printw("-");
+                move(12,2);
+                printw("-");
+                move(11,2);
+                printw("-");
+            }
+            if(input=='.'){
+                move(15,1);
+                printw("o");
+                move(16,1);
+                printw("o");
+                move(16,2);
+                printw("o");
+                move(15,2);
+                printw("o");
+            }else if(input!='.'){
+                move(15,1);
+                printw("-");
+                move(16,1);
+                printw("-");
+                move(16,2);
+                printw("-");
+                move(15,2);
+                printw("-");
+                    
+            }
+            move(0,0);
+            if(input=='q'){
+                clear();
+                endwin();
+                quick_exit(0);
+            }
+        }
+        refresh();
+    }
 
 
 }
