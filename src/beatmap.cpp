@@ -3,34 +3,97 @@
 #include<chrono>
 #include <termios.h>
 #include <ncursesw/ncurses.h>
+#include <SFML/Audio.hpp>
+#include <fstream>
 using namespace std;
 using namespace chrono;
-void makeBeatmap(int tempo, int length){//length is in seconds
+using namespace sf;
+void makeBeatmap(int tempo){//length is in seconds
+    ofstream out("beatmap.txt");
+    out<<"int tempo="<<tempo<<";"<<"\n";
 
-    bool a[tempo*length*60*4];
-    bool b[tempo*length*60*4];
-    bool c[tempo*length*60*4];
-    bool d[tempo*length*60*4];
+    int length=20;
+    bool a[tempo/60*length*4];
+    bool b[tempo/60*length*4];
+    bool c[tempo/60*length*4];
+    bool d[tempo/60*length*4];
     for(int i=0; i<tempo*length*60*4; i++){
         a[i]=false;
         b[i]=false;
         c[i]=false;
         d[i]=false;
     }
-    auto start=steady_clock::now();
-    auto end=steady_clock::now();
+    auto now=steady_clock::now();
+    auto lastBeat=steady_clock::now();
+    int index=0;
+    Music music;
+    music.openFromFile("music.mp3");
+    music.play();
     while(true){
-        auto end=steady_clock::now();
-        auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
-        int diff=duration.count();
+        now=steady_clock::now();
+        if(std::chrono::duration_cast<std::chrono::milliseconds>(now-lastBeat).count()>=((60.0/tempo/4)*1000)){
+            index++;
+            lastBeat=steady_clock::now();
+            if(index>sizeof(a)){
+                break;
+            }
+        }
+        now=steady_clock::now();
+        //std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count(); very importan
         char input=getch();
         //z x , . for input
-        switch(input){
-            case 'z': 
-            case 'x':
-            case ',':
-            case '.':
-            default: break;
+        if(input=='z'){
+            if((std::chrono::duration_cast<std::chrono::milliseconds>(now-lastBeat).count()>=((60.0/tempo/4)*750))){
+                if(index<sizeof(a)-1){
+                    a[index-1]=true;
+                }else{
+                    a[index]=true;
+                }
+            }else{
+                a[index]=true;
+            }
+        }
+        if(music.getStatus()!=sf::Music::Playing){
+            break;
+        }
+        
+    }
+    out<<"bool a["<<sizeof(a)<<"]=";
+    for(int i=0; i<sizeof(a); i++){
+        if(i!=sizeof(a)-1){
+            out<<a[i]<<",";
+        }else{
+            out<<a[i];
         }
     }
+    out<<"}"<<"\n";
+    out<<"bool b["<<sizeof(a)<<"]=";
+    for(int i=0; i<sizeof(a); i++){
+        if(i!=sizeof(a)-1){
+            out<<b[i]<<",";
+        }else{
+            out<<b[i];
+        }
+    }
+    out<<"}"<<"\n";
+    out<<"bool a["<<sizeof(a)<<"]=";
+    for(int i=0; i<sizeof(a); i++){
+        if(i!=sizeof(a)-1){
+            out<<b[i]<<",";
+        }else{
+            out<<b[i];
+        }
+    }
+    out<<"}"<<"\n";
+    out<<"bool a["<<sizeof(a)<<"]=";
+    for(int i=0; i<sizeof(a); i++){
+        if(i!=sizeof(a)-1){
+            out<<b[i]<<",";
+        }else{
+            out<<b[i];
+        }
+    }
+    out<<"}"<<"\n";
+    endwin();
+    quick_exit(0);
 }
