@@ -185,16 +185,6 @@ int main(){
         
     }
     int n=getLength();
-    vector<bool> a(n); 
-    vector<bool> b(n); 
-    vector<bool> c(n); 
-    vector<bool> d(n); 
-    for(int i=0; i<n; i++){
-        a[i]=aValue(i);
-        b[i]=bValue(i);
-        c[i]=cValue(i);
-        d[i]=dValue(i);
-    }
     auto aTime=steady_clock::now();
     auto bTime=steady_clock::now();
     auto cTime=steady_clock::now();
@@ -212,37 +202,37 @@ int main(){
             beatTime=steady_clock::now();
             songIndex++;
             for(int i=1; i<56; i+=2){
-            if(songIndex+i-1<0||songIndex+i-1>sizeof(a)){
+            if(songIndex+i-1<0||songIndex+i-1>n){
                 drawSquare(3, i, '-');
             }else{
-                if(a[i]){
+                if(aValue(i)){
                     drawSquare(3, i, '#');
                 }else{
                     drawSquare(3, i, '-');
                 }
             }
-            if(songIndex+i-1<0||songIndex+i-1>sizeof(a)){
+            if(songIndex+i-1<0||songIndex+i-1>n){
                 drawSquare(3, i, '-');
             }else{
-                if(b[i]){
+                if(aValue(i)){
                     drawSquare(3, i, '#');
                 }else{
                     drawSquare(3, i, '-');
                 }
             }
-            if(songIndex+i-1<0||songIndex+i-1>sizeof(a)){
+            if(songIndex+i-1<0||songIndex+i-1>n){
                 drawSquare(3, i, '-');
             }else{
-                if(c[i]){
+                if(aValue(i)){
                     drawSquare(3, i, '#');
                 }else{
                     drawSquare(3, i, '-');
                 }
             }
-            if(songIndex+i-1<0||songIndex+i-1>sizeof(a)){
+            if(songIndex+i-1<0||songIndex+i-1>n){
                 drawSquare(3, i, '-');
             }else{
-                if(d[i]){
+                if(aValue(i)){
                     drawSquare(3, i, '#');
                 }else{
                     drawSquare(3, i, '-');

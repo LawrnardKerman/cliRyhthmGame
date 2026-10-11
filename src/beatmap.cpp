@@ -15,7 +15,6 @@ void makeBeatmap(){//length is in seconds
     ofstream temp("beatmap.txt", ios::trunc); 
     temp.close();
     ofstream out("beatmap.txt");
-    out<<"int tempo="<<tempo<<";"<<"\n";
     out.close();
     clear();
     move(0,0);
@@ -34,6 +33,7 @@ void makeBeatmap(){//length is in seconds
     auto now=steady_clock::now();
     auto lastBeat=steady_clock::now();
     int index=0;
+    out<<"constexpr int tempo="<<tempo<<";"<<endl;
     music.play();
     while(true){
         now=steady_clock::now();
@@ -105,7 +105,7 @@ void makeBeatmap(){//length is in seconds
             out<<a[i];
         }
     }
-    out<<"}"<<"\n";
+    out<<"};"<<"\n";
     out<<"bool b["<<n<<"]={";
     for(int i=0; i<n; i++){
         if(i!=n-1){
@@ -114,8 +114,8 @@ void makeBeatmap(){//length is in seconds
             out<<b[i];
         }
     }
-    out<<"}"<<"\n";
-    out<<"bool c["<<n<<"]=";
+    out<<"};"<<"\n";
+    out<<"bool c["<<n<<"]={";
     for(int i=0; i<n; i++){
         if(i!=n-1){
             out<<b[i]<<",";
@@ -123,8 +123,8 @@ void makeBeatmap(){//length is in seconds
             out<<b[i];
         }
     }
-    out<<"}"<<"\n";
-    out<<"bool d["<<n<<"]=";
+    out<<"};"<<"\n";
+    out<<"bool d["<<n<<"]={";
     for(int i=0; i<n; i++){
         if(i!=n-1){
             out<<b[i]<<",";
@@ -132,7 +132,7 @@ void makeBeatmap(){//length is in seconds
             out<<b[i];
         }
     }
-    out<<"}"<<"\n";
+    out<<"};"<<"\n";
     out.close();
     endwin();
     quick_exit(0);
