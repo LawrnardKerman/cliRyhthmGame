@@ -1,6 +1,7 @@
 //beatmap maker haha funny osu refrence
 #include<bits/stdc++.h>
 #include<chrono>
+#include <ostream>
 #include <termios.h>
 #include <ncursesw/ncurses.h>
 #include <SFML/Audio.hpp>
@@ -16,9 +17,11 @@ void makeBeatmap(){//length is in seconds
     ofstream out("beatmap.txt");
     out<<"int tempo="<<tempo<<";"<<"\n";
     out.close();
+    cout<<"wrote to file"<<"\n";
     out.open("beatmap.txt");
     Music music;
     music.openFromFile("music.mp3");
+    cout<<"play music"<<endl;
     int length=music.getDuration().asSeconds();
     vector<bool> a(tempo/60*length*4); 
     vector<bool> b(tempo/60*length*4); 
