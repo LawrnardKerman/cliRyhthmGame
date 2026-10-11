@@ -8,11 +8,18 @@
 using namespace std;
 using namespace chrono;
 using namespace sf;
-void makeBeatmap(int tempo){//length is in seconds
+void makeBeatmap(){//length is in seconds
+    int tempo=120;
     ofstream out("beatmap.txt");
-    out<<"int tempo="<<tempo<<";"<<"\n";
+    out.close();
+    ofstream clear("example.txt", ios::trunc); 
+    clear.close();
+    out.open("beatmap.txt");
 
-    int length=20;
+    out<<"int tempo="<<tempo<<";"<<"\n";
+    Music music;
+    music.openFromFile("music.mp3");
+    int length=music.getDuration().asSeconds();
     bool a[tempo/60*length*4];
     bool b[tempo/60*length*4];
     bool c[tempo/60*length*4];
@@ -26,8 +33,6 @@ void makeBeatmap(int tempo){//length is in seconds
     auto now=steady_clock::now();
     auto lastBeat=steady_clock::now();
     int index=0;
-    Music music;
-    music.openFromFile("music.mp3");
     music.play();
     while(true){
         now=steady_clock::now();
@@ -94,6 +99,7 @@ void makeBeatmap(int tempo){//length is in seconds
         }
     }
     out<<"}"<<"\n";
+    out.close();
     endwin();
     quick_exit(0);
 }
