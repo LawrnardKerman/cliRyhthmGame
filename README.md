@@ -1,3 +1,5 @@
 # cliRyhthmGame
 cool ass rhythm game 
 so like a cli rhythm game for silly people like *me*! :3
+run ' mkdir -p ./build/Debug && g++ -Wall -Wextra -Wpedantic -Wshadow -Wformat=2 -Wcast-align -Wconversion -Wsign-conversion -Wnull-dereference -g3 -O0 -c src/beatmap.cpp -o ./build/Debug/beatmap.o && g++ -Wall -Wextra -Wpedantic -Wshadow -Wformat=2 -Wcast-align -Wconversion -Wsign-conversion -Wnull-dereference -g3 -O0 -c src/main.cpp -o ./build/Debug/main.o && g++ -Wall -Wextra -Wpedantic -Wshadow -Wformat=2 -Wcast-align -Wconversion -Wsign-conversion -Wnull-dereference -g3 -O0 -c src/song.cpp -o ./build/Debug/song.o && g++ -Wall -Wextra -Wpedantic -Wshadow -Wformat=2 -Wcast-align -Wconversion -Wsign-conversion -Wnull-dereference -g3 -O0 ./build/Debug/beatmap.o ./build/Debug/main.o ./build/Debug/song.o -o ./build/Debug/outDebug -lncurses -lsfml-audio -lsfml-system && ./build/Debug/outDebug '
+to launch the game

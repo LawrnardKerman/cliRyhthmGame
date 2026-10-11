@@ -9,21 +9,21 @@ using namespace std;
 using namespace chrono;
 using namespace sf;
 void makeBeatmap(){//length is in seconds
-    int tempo=120;
-    ofstream out("beatmap.txt");
-    out.close();
-    ofstream clear("example.txt", ios::trunc); 
+    nodelay(stdscr, TRUE);
+    constexpr int tempo=120;
+    ofstream clear("beatmap.txt", ios::trunc); 
     clear.close();
-    out.open("beatmap.txt");
-
+    ofstream out("beatmap.txt");
     out<<"int tempo="<<tempo<<";"<<"\n";
+    out.close();
+    out.open("beatmap.txt");
     Music music;
     music.openFromFile("music.mp3");
     int length=music.getDuration().asSeconds();
-    bool a[tempo/60*length*4];
-    bool b[tempo/60*length*4];
-    bool c[tempo/60*length*4];
-    bool d[tempo/60*length*4];
+    vector<bool> a(tempo/60*length*4); 
+    vector<bool> b(tempo/60*length*4); 
+    vector<bool> c(tempo/60*length*4); 
+    vector<bool> d(tempo/60*length*4); 
     for(int i=0; i<tempo*length*60*4; i++){
         a[i]=false;
         b[i]=false;

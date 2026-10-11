@@ -1,12 +1,13 @@
 
 #include <chrono>
 #include <cstdlib>
-#include <iterator>
+#include"beatmap.h"
 #include <ncurses.h>
 #include <string>
 #include <termios.h>
 #include <ncursesw/ncurses.h>
 #include "song.h"
+#include <SFML/Audio.hpp>
 using namespace std;
 using namespace chrono;
 void drawSquare(int row, int col, char in){
@@ -86,6 +87,8 @@ void drawUi(){
     move(0,0);
 }
 int main(){
+    
+
     initscr();
     cbreak();
     noecho();
@@ -103,6 +106,9 @@ int main(){
     refresh();
     while(true){
         input=getch();
+        if(input=='n'){
+            makeBeatmap();
+        }
         if(input=='s'){
             clear();
             drawBorder();
@@ -163,6 +169,9 @@ int main(){
             move(row,col);
             
             refresh();
+            if(input=='n'){
+                makeBeatmap();
+            }
             if(input=='q'){
                 move(0,0);
                 printw("quitting...");
@@ -176,10 +185,10 @@ int main(){
         
     }
     int n=getLength();
-    bool a[n];
-    bool b[n];
-    bool c[n];
-    bool d[n];
+    vector<bool> a(n); 
+    vector<bool> b(n); 
+    vector<bool> c(n); 
+    vector<bool> d(n); 
     for(int i=0; i<n; i++){
         a[i]=aValue(i);
         b[i]=bValue(i);

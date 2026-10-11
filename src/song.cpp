@@ -1,5 +1,5 @@
 #include <ncurses.h>
-int tempo=120; //bpm
+constexpr int tempo=120; //bpm
 bool a[480*3];
 bool b[480*3];
 bool c[480*3];
