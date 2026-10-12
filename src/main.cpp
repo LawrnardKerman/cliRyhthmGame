@@ -1,4 +1,5 @@
 
+#include <SFML/Audio/Music.hpp>
 #include <chrono>
 #include <cstdlib>
 #include"beatmap.h"
@@ -74,7 +75,7 @@ void drawBars(){
     }
 
 }
-void drawUi(){
+void drawUi(){  
     drawBars();
     move(2,1);
     printw("z");
@@ -87,7 +88,9 @@ void drawUi(){
     move(0,0);
 }
 int main(){
-    
+    sf::Music music;
+    music.openFromFile("music.mp3");
+
 
     initscr();
     cbreak();
@@ -195,47 +198,49 @@ int main(){
     move(0,0);
     int songIndex=-27;
     while(true){
-        drawUi();
         now=steady_clock::now();
         input=getch();
-        if(std::chrono::duration_cast<std::chrono::milliseconds>(now-beatTime).count()>=((60.0/tempo/4)*1000)){
+        if(std::chrono::duration_cast<std::chrono::milliseconds>(now-beatTime).count()>=(60000/tempo/4)){
             beatTime=steady_clock::now();
+            if(songIndex==0){
+                music.play();
+            }
             songIndex++;
             for(int i=1; i<56; i+=2){
             if(songIndex+i-1<0||songIndex+i-1>n){
                 drawSquare(3, i, '-');
             }else{
-                if(aValue(i)){
+                if(aValue(songIndex+i-1)){
                     drawSquare(3, i, '#');
                 }else{
                     drawSquare(3, i, '-');
                 }
             }
             if(songIndex+i-1<0||songIndex+i-1>n){
-                drawSquare(3, i, '-');
+                drawSquare(7, i, '-');
             }else{
-                if(aValue(i)){
-                    drawSquare(3, i, '#');
+                if(bValue(songIndex+i-1)){
+                    drawSquare(7, i, '#');
                 }else{
-                    drawSquare(3, i, '-');
+                    drawSquare(7, i, '-');
                 }
             }
             if(songIndex+i-1<0||songIndex+i-1>n){
-                drawSquare(3, i, '-');
+                drawSquare(11, i, '-');
             }else{
-                if(aValue(i)){
-                    drawSquare(3, i, '#');
+                if(cValue(songIndex+i-1)){
+                    drawSquare(11, i, '#');
                 }else{
-                    drawSquare(3, i, '-');
+                    drawSquare(11, i, '-');
                 }
             }
             if(songIndex+i-1<0||songIndex+i-1>n){
-                drawSquare(3, i, '-');
+                drawSquare(15, i, '-');
             }else{
-                if(aValue(i)){
-                    drawSquare(3, i, '#');
+                if(dValue(songIndex+i-1)){
+                    drawSquare(15, i, '#');
                 }else{
-                    drawSquare(3, i, '-');
+                    drawSquare(15, i, '-');
                 }
             }
         }
@@ -304,7 +309,10 @@ int main(){
         }
         
         move(0,0);
+        printw("%ld",std::chrono::duration_cast<std::chrono::milliseconds>(now-beatTime).count());
         refresh();
+        move(0, 10);
+        printw("%d", songIndex);
     }
 
 

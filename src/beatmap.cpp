@@ -118,18 +118,18 @@ void makeBeatmap(){//length is in seconds
     out<<"bool c["<<n<<"]={";
     for(int i=0; i<n; i++){
         if(i!=n-1){
-            out<<b[i]<<",";
+            out<<c[i]<<",";
         }else{
-            out<<b[i];
+            out<<c[i];
         }
     }
     out<<"};"<<"\n";
     out<<"bool d["<<n<<"]={";
     for(int i=0; i<n; i++){
         if(i!=n-1){
-            out<<b[i]<<",";
+            out<<d[i]<<",";
         }else{
-            out<<b[i];
+            out<<d[i];
         }
     }
     out<<"};"<<"\n";
