@@ -9,6 +9,7 @@
 #include <ncursesw/ncurses.h>
 #include "song.h"
 #include <SFML/Audio.hpp>
+#include <unistd.h>
 using namespace std;
 using namespace chrono;
 void drawSquare(int row, int col, char in){
@@ -309,10 +310,25 @@ int main(){
         }
         
         move(0,0);
+        printw("###");
         printw("%ld",std::chrono::duration_cast<std::chrono::milliseconds>(now-beatTime).count());
         refresh();
         move(0, 10);
+        printw("##############");
+        move(0,10);
         printw("%d", songIndex);
+        if(songIndex==n+10){
+            break;
+        }
+    }
+    for(int i=0; i<20; i++){
+        for(int j=0; j<60; j++){
+            move(i,j);
+            printw(" ");
+            refresh();
+            usleep(1000);
+            
+        }
     }
 
 
